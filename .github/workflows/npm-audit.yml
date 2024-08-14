@@ -1,0 +1,28 @@
+name: Run npm audit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up nodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.16.0"
+
+      - name: install dependencies
+        run: npm install
+
+      - name: Run npm audit
+        run: npm audit
